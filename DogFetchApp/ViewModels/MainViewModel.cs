@@ -23,10 +23,22 @@ namespace DogFetchApp.ViewModels
         private ObservableCollection<string> breedList;
         private string numberOfImageToLoad;
         private int numberOfImageToShow;
+        private string selectedPicture;
 
         private string selectedItemBreed;
 
         private ObservableCollection<string> imagesToload;
+
+        public string SelectedPicture
+        {
+            get => selectedPicture;
+
+            set
+            {
+                selectedPicture = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int NumberOfImageToShow
         {
@@ -131,6 +143,7 @@ namespace DogFetchApp.ViewModels
 
 
         }
+
 
         private void Change_Language(string str)
         {
