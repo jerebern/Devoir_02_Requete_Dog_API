@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Net.Cache;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Markup;
-using System.Windows.Media.Imaging;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace DogFetchApp.ViewModels
 {
@@ -16,15 +17,27 @@ namespace DogFetchApp.ViewModels
 
     {
         public DelegateCommand<string> FetchCommand { get; private set; }
+        public DelegateCommand<string> ChangeLanguageCommand { get; private set; }
         private string dogImagesList;
         private ObservableCollection<string> dogsImages;
         private ObservableCollection<string> breedList;
         private string numberOfImageToLoad;
+        private int numberOfImageToShow;
 
         private string selectedItemBreed;
 
         private ObservableCollection<string> imagesToload;
 
+        public int NumberOfImageToShow
+        {
+            get => numberOfImageToShow;
+
+            set
+            {
+                numberOfImageToShow = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<string> ImagesToload{
 
             get => imagesToload;
@@ -98,7 +111,8 @@ namespace DogFetchApp.ViewModels
         public MainViewModel()
         {
             FetchCommand = new DelegateCommand<string>(FetchPicture);
-            Init_value_combobox();
+            ChangeLanguageCommand = new DelegateCommand<string>(Change_Language);
+            Init_value_combox();
             Init();
 
         }
@@ -111,10 +125,23 @@ namespace DogFetchApp.ViewModels
 
         }
         
-        private void  Init_value_combobox()
+        private void  Init_value_combox()
         {
             ImagesToload = new ObservableCollection<string> { "1", "3", "5", "10" };
 
+
+        }
+
+        private void Change_Language(string str)
+        {
+            Debug.WriteLine("Changing language to : " + str);
+            Properties.Settings.Default.Language = str;
+            Properties.Settings.Default.Save();
+            Debug.WriteLine("Starting " + Application.ResourceAssembly.Location);
+             string path =  Application.ResourceAssembly.Location;
+            string filtoStart = Path.ChangeExtension(path,".exe");
+            System.Diagnostics.Process.Start(filtoStart);
+            Application.Current.Shutdown();
 
         }
 
@@ -125,6 +152,10 @@ namespace DogFetchApp.ViewModels
             {
 
                 Debug.WriteLine(NumberOfImageTolLoad);
+
+                if(NumberOfImageTolLoad != null)
+                {
+
                 for(int i = 0; i < int.Parse(NumberOfImageTolLoad.ToString()); i++)
                 {
 
@@ -138,6 +169,9 @@ namespace DogFetchApp.ViewModels
                 Debug.WriteLine("Loading from : " + SelectedItemBreed + " Source");
 
                 Debug.WriteLine(DogsImages.Count);
+                    numberOfImageToShow = int.Parse(NumberOfImageTolLoad);
+            }
+
             }
         }
 

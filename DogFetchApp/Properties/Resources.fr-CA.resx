@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Application_title" xml:space="preserve">
-    <value>Dog picture fetcher</value>
+    <value>Chercheur de photos de Chiens</value>
   </data>
   <data name="btn_fecth" xml:space="preserve">
-    <value>Fetch</value>
+    <value>Rechercher</value>
   </data>
   <data name="btn_next" xml:space="preserve">
-    <value>Next!</value>
+    <value>Suivant</value>
   </data>
   <data name="header_language" xml:space="preserve">
-    <value>Language</value>
+    <value>Langue</value>
   </data>
   <data name="header_setting" xml:space="preserve">
-    <value>Setting</value>
+    <value>Parametre</value>
   </data>
   <data name="txt_breed" xml:space="preserve">
-    <value>Breed</value>
+    <value>Race</value>
   </data>
   <data name="txt_numberpictures" xml:space="preserve">
-    <value>Number of Pictures to load</value>
+    <value>Nombre de photos à charger</value>
   </data>
   <data name="txt_url" xml:space="preserve">
-    <value>Image URL : </value>
+    <value>URL de l'image : </value>
   </data>
 </root>

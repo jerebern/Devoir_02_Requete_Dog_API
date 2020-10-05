@@ -59,5 +59,77 @@ namespace DogFetchApp.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Dog picture fetcher.
+        /// </summary>
+        public static string Application_title {
+            get {
+                return ResourceManager.GetString("Application_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Fetch.
+        /// </summary>
+        public static string btn_fecth {
+            get {
+                return ResourceManager.GetString("btn_fecth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Next!.
+        /// </summary>
+        public static string btn_next {
+            get {
+                return ResourceManager.GetString("btn_next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Language.
+        /// </summary>
+        public static string header_language {
+            get {
+                return ResourceManager.GetString("header_language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Setting.
+        /// </summary>
+        public static string header_setting {
+            get {
+                return ResourceManager.GetString("header_setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Breed.
+        /// </summary>
+        public static string txt_breed {
+            get {
+                return ResourceManager.GetString("txt_breed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Number of Pictures to load.
+        /// </summary>
+        public static string txt_numberpictures {
+            get {
+                return ResourceManager.GetString("txt_numberpictures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Image URL : .
+        /// </summary>
+        public static string txt_url {
+            get {
+                return ResourceManager.GetString("txt_url", resourceCulture);
+            }
+        }
     }
 }
