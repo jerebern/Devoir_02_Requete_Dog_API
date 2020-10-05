@@ -6,7 +6,7 @@ namespace ApiHelper.Models
 {
     public class DogModel
     {
-        public IList<string> message { get; set; }
+        public string message { get; set; }
 
     }
 }

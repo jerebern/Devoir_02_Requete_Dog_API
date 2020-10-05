@@ -3,8 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Net.Cache;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
+using System.Windows.Media.Imaging;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DogFetchApp.ViewModels
 {
@@ -12,26 +16,61 @@ namespace DogFetchApp.ViewModels
 
     {
         public DelegateCommand<string> FetchCommand { get; private set; }
-        private ObservableCollection<string> dogImagesList;
+        private string dogImagesList;
+        private ObservableCollection<string> dogsImages;
         private ObservableCollection<string> breedList;
+        private string numberOfImageToLoad;
 
-        private string selectedItem;
+        private string selectedItemBreed;
 
-        
-        public string SelectedItem
-        {
-            get => selectedItem;
+        private ObservableCollection<string> imagesToload;
+
+        public ObservableCollection<string> ImagesToload{
+
+            get => imagesToload;
 
             set
             {
-                selectedItem = value;
+                imagesToload = value;
                 OnPropertyChanged();
-                Debug.WriteLine("Selected breed : " + selectedItem);
+            }
+        
+        }
+        public string NumberOfImageTolLoad
+        {
+            get => numberOfImageToLoad;
+
+            set
+            {
+                numberOfImageToLoad = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> DogsImages{
+            get => dogsImages;
+
+            set
+            {
+                dogsImages = value;
+                OnPropertyChanged();
+            }
+
+            }
+        public string SelectedItemBreed
+        {
+            get => selectedItemBreed;
+
+            set
+            {
+                selectedItemBreed = value;
+                OnPropertyChanged();
+                Debug.WriteLine("Selected breed : " + selectedItemBreed);
             }
 
         }
 
-        public ObservableCollection<string> DogImagesList
+        public string DogImagesList
         {
             get => dogImagesList;
 
@@ -59,6 +98,7 @@ namespace DogFetchApp.ViewModels
         public MainViewModel()
         {
             FetchCommand = new DelegateCommand<string>(FetchPicture);
+            Init_value_combobox();
             Init();
 
         }
@@ -68,13 +108,37 @@ namespace DogFetchApp.ViewModels
         private async void Init()
         {
             await Init_BreedList();
+
+        }
+        
+        private void  Init_value_combobox()
+        {
+            ImagesToload = new ObservableCollection<string> { "1", "3", "5", "10" };
+
+
         }
 
         private async void FetchPicture(object obj)
         {
-            DogImagesList = new ObservableCollection<string>();
-            // to do send breed to request 
+            DogsImages = new ObservableCollection<string>();
+            if (SelectedItemBreed != null)
+            {
 
+                Debug.WriteLine(NumberOfImageTolLoad);
+                for(int i = 0; i < int.Parse(NumberOfImageTolLoad.ToString()); i++)
+                {
+
+                    var images = await ApiHelper.DogApiProcessor.GetImageUrl(SelectedItemBreed);
+
+
+                    DogsImages.Add(images.message);
+
+                }
+          
+                Debug.WriteLine("Loading from : " + SelectedItemBreed + " Source");
+
+                Debug.WriteLine(DogsImages.Count);
+            }
         }
 
         private async Task Init_BreedList()

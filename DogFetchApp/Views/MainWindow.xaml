@@ -29,7 +29,7 @@
         <StatusBar DockPanel.Dock="Bottom">
             <TextBlock Text="Image URL : "/>
             <Hyperlink>
-                <TextBlock Text="Put URL here"/>
+                <TextBlock Text="{Binding DogImagesList}"/>
             </Hyperlink>
         </StatusBar>
         <Grid Margin="5">
@@ -47,7 +47,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Breed : "/>
-            <ComboBox  Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Breedlist}" SelectedItem="{Binding SelectedItem}">
+            <ComboBox  Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Breedlist}" SelectedItem="{Binding SelectedItemBreed}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding}"/>
@@ -55,19 +55,20 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock Grid.Row="1" Text="Nombre de photos :"/>
-            <ComboBox Grid.Row="1" Grid.Column="1">
-                <ComboBoxItem Content="1"/>
-                <ComboBoxItem Content="3"/>
-                <ComboBoxItem Content="5"/>
-                <ComboBoxItem Content="10"/>
+            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ImagesToload}" SelectedItem ="{Binding NumberOfImageTolLoad}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate >
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button Grid.Row="2" Grid.Column="1" Content="Fetch!" Width="150"/>
+            <Button Grid.Row="2" Grid.Column="1" Content="Fetch!" Width="150"  Command="{Binding FetchCommand}"/>
             <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <ListView Grid.Row="0" ItemsSource="{Binding}">
+                <ListView Grid.Row="0" ItemsSource="{Binding DogsImages}" Name="dogimg">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="5" HorizontalAlignment="Stretch"/>
@@ -78,7 +79,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                 <Image Source="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Stretch="UniformToFill"/>
-                                <TextBlock Text="{Binding }" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+                                <TextBlock Text="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
